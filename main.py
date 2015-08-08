@@ -316,7 +316,7 @@ if __name__ == "__main__":
     rawmat_mrkt.add_price('IBC',10.,2800.,"RUB")
     the_devs.set_rawmat_market(rawmat_mrkt)
 
-    the_producer = cProducer("Producer", 10000000)
+    the_producer = cProducer("Producer", 1000000)
     the_devs.set_the_producer(the_producer)
 
     print("start simulation")
