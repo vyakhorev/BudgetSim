@@ -77,7 +77,6 @@ class cContainerPart(simpy.Container):
         if len(self.filled.users) > 0:
             self.filled.release(self.filled.users[0])
 
-
 class cConnToDEVS(object):
     def log_repr(self):
         return self.__repr__()

@@ -105,7 +105,6 @@ class cCurrencyMarket(sime.cConnToDEVS):
 class cMarket(sime.cConnToDEVS):
     def __init__(self):
         self.prices = []
-        self.pending_orders = []
 
     def add_price(self, good, minqtty, price, ccy):
         price_i = dict(good = good, minqtty = minqtty, price = price, ccy = ccy)
@@ -130,14 +129,11 @@ class cMarket(sime.cConnToDEVS):
 
     def my_generator(self):
         while 1:
+            yield self.devs.simpy_env.timeout(1)
             yield self.devs.simpy_env.process(self.day_step())
 
     def day_step(self):
-        yield self.devs.simpy_env.timeout(1)
-        self.settle_orders()
-
-    def settle_orders(self):
-        pass
+        yield sime.empty_event(self.devs.simpy_env)
 
 class cRawMaterialsMarket(cMarket):
     def __repr__(self):
@@ -149,17 +145,15 @@ class cRawMaterialsMarket(cMarket):
 class cFinalProductMarket(cMarket):
     def __init__(self):
         self.clients = []
-        self.orders = []
         super(cFinalProductMarket,self).__init__()
 
     def init_sim(self):
         self.RES_orders = simpy.Store(self.devs.simpy_env)
 
-    def add_client(self,clientname,good):
-        #adding new client to list
+    def add_client(self,clientname,good,qtty,freq):
         if clientname not in (self.clients):
-            client = {'clientname': clientname ,'good': good}
-            self.clients.append(client)
+            client = {'clientname': clientname ,'good': good, 'qtty': qtty, 'freq':freq}
+            self.clients += [client]
 
     def add_order(self):
         pass
@@ -175,8 +169,9 @@ class cFinalProductMarket(cMarket):
     def __repr__(self):
         return "final materials market"
 
-    def settle_orders(self):
-        self.sent_log('settling orders...')
+    def day_step(self):
+        # Generate orders here
+        pass
 
 
 class cProducer(sime.cConnToDEVS):
@@ -316,7 +311,7 @@ if __name__ == "__main__":
     rawmat_mrkt.add_price('IBC',10.,2800.,"RUB")
     the_devs.set_rawmat_market(rawmat_mrkt)
 
-    the_producer = cProducer("Producer", 1000000)
+    the_producer = cProducer("Producer", 3000000)
     the_devs.set_the_producer(the_producer)
 
     print("start simulation")
