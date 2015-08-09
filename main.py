@@ -320,6 +320,7 @@ if __name__ == "__main__":
     the_devs.set_the_producer(the_producer)
 
     print("start simulation")
+    print ('put the dispenser here!!!')
 
     # Build runner and observers
     runner = sime.cSimulRunner(the_devs)
