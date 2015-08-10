@@ -167,7 +167,6 @@ class cFinalProductMarket(cMarket):
     def __repr__(self):
         return "final materials market"
 
-
 class cClient(sime.cConnToDEVS):
     def __init__(self, companyname, defferment):
         self.supply_lines = []
@@ -203,7 +202,6 @@ class cClient(sime.cConnToDEVS):
             new_order = {'qtty': qtty, 'good': good, 'desired_shipment_date': desired_shipment_date, 'client': self}
             self.sent_log("new order " + str(qtty) + " of " + str(good))
             self.devs.finalproduct_market.add_order(new_order)
-
 
 class cProducer(sime.cConnToDEVS):
     def __init__(self, companyname, RUB_amount):
@@ -268,9 +266,9 @@ class cProducer(sime.cConnToDEVS):
             elif atype == "sell_goods":
                 self.sent_log("selling " + str(deal_i["qtty"]) + " of " + deal_i["good"])
                 if deal_i['client'].defferment > 0:
-                    self.devs.simpy_env.process(do_sell_prepay_deal(self, deal_i))
-                else:
                     self.devs.simpy_env.process(do_sell_postpay_deal(self, deal_i))
+                else:
+                    self.devs.simpy_env.process(do_sell_prepay_deal(self, deal_i))
 
     def PROC_sales(self):
         while 1:
@@ -297,7 +295,6 @@ def do_sell_postpay_deal(agent, deal_i):
     yield agent.devs.simpy_env.process(agent.RES_warehouse.get_bulk(deal_i['good'], deal_i["qtty"]))
     yield agent.devs.simpy_env.timeout(deal_i['client'].defferment)
     agent.devs.simpy_env.process(agent.RES_money.add_bulk("RUB", deal_i['RUB_to_receive']))
-
 
 
 # Наблюдатели за системой
