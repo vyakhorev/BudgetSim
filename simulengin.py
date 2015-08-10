@@ -173,9 +173,10 @@ if __name__ == '__main__':
 
     def demand(env, cont):
         while 1:
-            yield env.timeout(5)
+            yield env.timeout(1)
             qtty = 0
-            yield env.process(cont.get_available(700))
+            yield env.process(cont.get_available(300))
+            qtty = cont.level
             print("Got " + str(qtty))
 
 
