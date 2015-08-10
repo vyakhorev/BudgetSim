@@ -64,7 +64,6 @@ class cContainerPart(simpy.Container):
     def get_available(self, qtty):
         if self.level >= qtty:
             yield self.get(qtty)
-            print("output " + str(qtty))
         else:
             if self.level > 0:
                 yield self._env.process(self.get_available(self.level))
@@ -174,11 +173,7 @@ if __name__ == '__main__':
     def demand(env, cont):
         while 1:
             yield env.timeout(1)
-            qtty = 0
-            yield env.process(cont.get_available(300))
-            qtty = cont.level
-            print("Got " + str(qtty))
-
+            yield env.process(cont.get_available(100))
 
     env = simpy.Environment()
     cont = cContainerPart(env)

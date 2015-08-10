@@ -8,19 +8,25 @@ import simulengin as sime
 class cBudgetSystem(sime.cDiscreteEventSystem):
 
     def set_currency_market(self, block):
-        block.s_set_devs(self)
-        self.blocks += [block]
+        self.register_block(block)
         self.currency_market = block
 
     def set_rawmat_market(self, block):
-        block.s_set_devs(self)
-        self.blocks += [block]
+        self.register_block(block)
         self.rawmat_market = block
+
+    def set_finalproduct_market(self, block):
+        self.register_block(block)
+        self.finalproduct_market = block
 
     def set_the_producer(self, block):
         block.s_set_devs(self)
         self.blocks += [block]
         self.the_producer = block
+
+    def register_block(self, block):
+        block.s_set_devs(self)
+        self.blocks += [block]
 
     def build_system(self):
         self.init_goods()
@@ -44,6 +50,9 @@ class cCurrencyMarket(sime.cConnToDEVS):
 
     def __init__(self):
         self.ccy_quotes = {}
+
+    def __repr__(self):
+        return "currency market"
 
     def log_repr(self):
         return "currency market"
@@ -139,9 +148,6 @@ class cRawMaterialsMarket(cMarket):
     def __repr__(self):
         return "raw materials market"
 
-    def settle_orders(self):
-        self.sent_log('settling orders...')
-
 class cFinalProductMarket(cMarket):
     def __init__(self):
         self.clients = []
@@ -149,29 +155,54 @@ class cFinalProductMarket(cMarket):
 
     def init_sim(self):
         self.RES_orders = simpy.Store(self.devs.simpy_env)
+        for cl_i in self.clients:
+            self.devs.register_block(cl_i)
 
-    def add_client(self,clientname,good,qtty,freq):
-        if clientname not in (self.clients):
-            client = {'clientname': clientname ,'good': good, 'qtty': qtty, 'freq':freq}
-            self.clients += [client]
+    def add_client(self, client):
+        self.clients += [client]
 
-    def add_order(self):
-        pass
-
-    def my_generator(self):
-        while 1:
-#            for cl_i in self.clients:
-#                self.orders += {cl_i['clientname'],cl_i['Good']}
-
-            self.RES_orders.put(self.clients)
-            yield self.devs.simpy_env.timeout(1)
+    def add_order(self, order_i):
+        self.RES_orders.put(order_i)
 
     def __repr__(self):
         return "final materials market"
 
-    def day_step(self):
-        # Generate orders here
-        pass
+
+class cClient(sime.cConnToDEVS):
+    def __init__(self, companyname, defferment):
+        self.supply_lines = []
+        self.companyname = companyname
+        self.defferment = defferment
+
+    def __repr__(self):
+        return self.companyname
+
+    def add_supply_line(self, good, qtty, freq):
+        new_supply_line = {}
+        new_supply_line["good"] = good
+        new_supply_line["qtty"] = qtty
+        new_supply_line["freq"] = freq #every freq times on average
+        self.supply_lines += [new_supply_line]
+
+    def init_sim(self):
+        for supply_line in self.supply_lines:
+            supply_line["last_time"] = self.devs.nowsimtime()
+
+    def my_generator(self):
+        for supl_i in self.supply_lines:
+            self.devs.simpy_env.process(self.PROC_supply_line(supl_i))
+        yield sime.empty_event(self.devs.simpy_env) #Formality
+
+    def PROC_supply_line(self, supply_line):
+        while 1:
+            till_next_order = supply_line["freq"] #TODO: random and account for last_time
+            yield self.devs.simpy_env.timeout(till_next_order)
+            qtty = supply_line["qtty"]
+            good = supply_line["good"]
+            desired_shipment_date = self.devs.nowsimtime()
+            new_order = {'qtty': qtty, 'good': good, 'desired_shipment_date': desired_shipment_date, 'client': self}
+            self.sent_log("new order " + str(qtty) + " of " + str(good))
+            self.devs.finalproduct_market.add_order(new_order)
 
 
 class cProducer(sime.cConnToDEVS):
@@ -201,6 +232,7 @@ class cProducer(sime.cConnToDEVS):
         self.devs.simpy_env.process(self.PROC_replenish_inventory())
         self.devs.simpy_env.process(self.PROC_supply_manager())
         self.devs.simpy_env.process(self.PROC_dealer())
+        self.devs.simpy_env.process(self.PROC_sales())
         yield sime.empty_event(self.devs.simpy_env) #Formality
 
     def PROC_replenish_inventory(self):
@@ -234,11 +266,39 @@ class cProducer(sime.cConnToDEVS):
                 self.devs.simpy_env.process(do_buy_prepay_deal(self, deal_i))
                 self.sent_log("bought " + str(deal_i["qtty"]) + " of " + deal_i["good"] + " for "+ str(deal_i["RUB_to_pay"]) + " RUB")
             elif atype == "sell_goods":
-                self.sent_log("selling " + str(deal_i))
+                self.sent_log("selling " + str(deal_i["qtty"]) + " of " + deal_i["good"])
+                if deal_i['client'].defferment > 0:
+                    self.devs.simpy_env.process(do_sell_prepay_deal(self, deal_i))
+                else:
+                    self.devs.simpy_env.process(do_sell_postpay_deal(self, deal_i))
+
+    def PROC_sales(self):
+        while 1:
+            ord_i = yield self.devs.finalproduct_market.RES_orders.get()
+            self.sent_log("new order from " + str(ord_i['client']) + ' for ' + str(ord_i['qtty']) + ' of ' + ord_i['good'])
+            deal_i = {}
+            deal_i["good"] = ord_i["good"]
+            deal_i["qtty"] = ord_i["qtty"]
+            deal_i['client'] = ord_i['client']
+            deal_i["price"] = self.devs.finalproduct_market.give_price(deal_i["good"], deal_i["qtty"])
+            deal_i["type"] = "sell_goods"
+            deal_i["RUB_to_receive"] = deal_i["qtty"]*deal_i["price"]["price"]*self.devs.currency_market.get_ccy_quote(deal_i["price"]["ccy"])
+            self.RES_deals.put(deal_i)
 
 def do_buy_prepay_deal(agent, deal_i):
     yield agent.devs.simpy_env.process(agent.RES_money.get_bulk("RUB", deal_i["RUB_to_pay"]))
     agent.RES_warehouse.add_bulk(deal_i["good"], deal_i["qtty"])
+
+def do_sell_prepay_deal(agent, deal_i):
+    yield agent.devs.simpy_env.process(agent.RES_warehouse.get_bulk(deal_i['good'], deal_i["qtty"]))
+    agent.devs.simpy_env.process(agent.RES_money.add_bulk("RUB", deal_i['RUB_to_receive']))
+
+def do_sell_postpay_deal(agent, deal_i):
+    yield agent.devs.simpy_env.process(agent.RES_warehouse.get_bulk(deal_i['good'], deal_i["qtty"]))
+    yield agent.devs.simpy_env.timeout(deal_i['client'].defferment)
+    agent.devs.simpy_env.process(agent.RES_money.add_bulk("RUB", deal_i['RUB_to_receive']))
+
+
 
 # Наблюдатели за системой
 class cRateObserver(sime.cAbstObserver):
@@ -310,6 +370,21 @@ if __name__ == "__main__":
     rawmat_mrkt.add_price('IBC',0.,4800.,"RUB")
     rawmat_mrkt.add_price('IBC',10.,2800.,"RUB")
     the_devs.set_rawmat_market(rawmat_mrkt)
+
+    final_mrkt = cFinalProductMarket()
+    final_mrkt.add_price('FinalGood1',0.,3.,'USD')
+    final_mrkt.add_price('FinalGood2',0.,4.,'USD')
+    the_devs.set_finalproduct_market(final_mrkt)
+
+    cl1 = cClient('Client 1', 30)
+    cl1.add_supply_line('FinalGood1',1000,15)
+    cl1.add_supply_line('FinalGood2',1500,30)
+    final_mrkt.add_client(cl1)
+
+    cl2 = cClient('Client 2',0)
+    cl2.add_supply_line('FinalGood1',100,5)
+    cl2.add_supply_line('FinalGood2',70,10)
+    final_mrkt.add_client(cl2)
 
     the_producer = cProducer("Producer", 3000000)
     the_devs.set_the_producer(the_producer)
