@@ -242,7 +242,6 @@ class cProducer(sime.cConnToDEVS):
         self.RES_prod_orders = simpy.Store(self.devs.simpy_env)
         # Заказы в оборудование
         self.RES_prod_unit_orders = simpy.Store(self.devs.simpy_env)
-
         # Бюджет продаж
         self.PLAN_sales_budget = cPlan() # На момент желаемой отгрузки. what = goods
         # План производства
@@ -270,13 +269,14 @@ class cProducer(sime.cConnToDEVS):
 
     def PROC_replenish_inventory(self):
         while 1:
-            yield self.devs.simpy_env.timeout(15)
             orders = []
-            orders += [dict(good = 'Oil1Drum', qtty = 9000)]
-            orders += [dict(good = 'Elastomer', qtty = 1000)]
+            orders += [dict(good = 'Oil1Drum', qtty = 10000)]
+            orders += [dict(good = 'Oil2Drum', qtty = 10000)]
+            orders += [dict(good = 'Elastomer', qtty = 3000)]
             for ord_i in orders:
                 self.sent_log("Ordering " + str(ord_i['qtty']) + " of " + ord_i['good'])
                 self.RES_rawmat_buy_orders.put(ord_i)
+            yield self.devs.simpy_env.timeout(15)
 
     def PROC_supply_manager(self):
         while 1:
@@ -369,18 +369,22 @@ def do_buy_prepay_deal(agent, deal_i):
 
 def do_sell_prepay_deal(agent, deal_i):
     yield agent.devs.simpy_env.process(agent.RES_warehouse.get_bulk(deal_i['good'], deal_i["qtty"]))
-    agent.devs.simpy_env.process(agent.RES_money.add_bulk("RUB", deal_i['RUB_to_receive']))
+    agent.RES_money.add_bulk("RUB", deal_i['RUB_to_receive'])
 
 def do_sell_postpay_deal(agent, deal_i):
     yield agent.devs.simpy_env.process(agent.RES_warehouse.get_bulk(deal_i['good'], deal_i["qtty"]))
     yield agent.devs.simpy_env.timeout(deal_i['client'].defferment)
-    agent.devs.simpy_env.process(agent.RES_money.add_bulk("RUB", deal_i['RUB_to_receive']))
+    agent.RES_money.add_bulk("RUB", deal_i['RUB_to_receive'])
 
 class cProductionUnit(sime.cConnToDEVS):
     def __init__(self, name):
         self.production_schemes = []
         self.cost_per_unit = 0
         self.name = name
+
+    def __repr__(self):
+        return self.name
+
 
     def init_sim(self):
         #self.resource = simpy.Resource(self.devs.simpy_env)
@@ -397,6 +401,7 @@ class cProductionUnit(sime.cConnToDEVS):
     def my_generator(self):
         while 1:
             prod_order = yield self.RES_order_queue.get()
+            self.sent_log('producing ' + str(prod_order['qtty']) + ' of ' + str(prod_order['good']))
             # Подбираем "рецепт" производства
             best_scheme = None
             min_time = None
@@ -412,10 +417,13 @@ class cProductionUnit(sime.cConnToDEVS):
             # TODO: что-то сделать, если не можем произвести
             for op_i in best_scheme.get_operations(prod_order['qtty']):
                 if op_i['type'] == 'take_material':
+                    self.sent_log('taking ' + str(op_i['qtty']) + " of " + str(op_i['material']))
                     yield self.devs.simpy_env.process(self.owner.RES_warehouse.get_bulk(op_i['material'], op_i['qtty']))
                 elif op_i['type'] == 'busy':
+                    self.sent_log('busy with producing' + str(op_i['good']))
                     yield self.devs.simpy_env.timeout(op_i['timeout'])
                 elif op_i['type'] == 'receive_good':
+                    self.sent_log(str(op_i['qtty']) + ' of ' + str(op_i['good']) + ' is ready!')
                     self.owner.RES_warehouse.add_bulk(op_i['good'], op_i['qtty'])
 
 class cProdSchemeMixer(object):
@@ -460,7 +468,7 @@ class cProdSchemeMixer(object):
             mat = inp['material']
             qtty = inp['qtty_per_unit'] * final_qtty
             operations += [{'type':'take_material', 'material':mat, 'qtty':qtty}]
-        operations += [{'type':'busy','timeout':self.timeout}]
+        operations += [{'type':'busy', 'good':self.final_good, 'timeout':self.timeout}]
         operations += [{'type':'receive_good', 'good':self.final_good, 'qtty':final_qtty}]
         return operations
 
@@ -487,10 +495,10 @@ class cPlan(object):
         return self.active_whats
 
     def get_howmuch_between_whens(self, what, when1, when2):
-        if not what in self.active_whats:
-            return 0
         if when1 > when2:
             raise BaseException('cPlan.get_whats_between_whens(when1, when2) - should be when1<=when2 !')
+        if not what in self.active_whats:
+            return 0
         N = len(self.active_whens)
         if N==0:
             return 0
@@ -599,7 +607,7 @@ class cAccount(object):
         if not(item in self.bulk_inventory):
             self.bulk_inventory[item] = simpy.Container(simpy_env)
         self.bulk_inventory[item].put(amount)
-        yield sime.empty_event(self.devs.simpy_env)
+        #yield sime.empty_event(self.devs.simpy_env)
 
     def get_bulk(self, item, amount):
         if not(item in self.bulk_inventory):
@@ -656,7 +664,7 @@ if __name__ == "__main__":
     cl2.add_supply_line('FinalGood2',70,10)
     final_mrkt.add_client(cl2)
 
-    the_producer = cProducer("Producer", 3000000)
+    the_producer = cProducer("Producer", 30000000)
     the_devs.set_the_producer(the_producer)
 
     # TODO add drums in a nice way
@@ -683,7 +691,7 @@ if __name__ == "__main__":
 
     # Build runner and observers
     runner = sime.cSimulRunner(the_devs)
-    runner.add_observer(cRateObserver,u"Курсы валют",10)
+    #runner.add_observer(cRateObserver,u"Курсы валют",10)
     runner.add_observer(cMoneyObserver,u"Деньги в казне", 1)
     runner.add_observer(cInventoryObserver,u"Товары",1)
 
@@ -693,9 +701,12 @@ if __name__ == "__main__":
     log = loganddata['log_list']
 
     # Выводим наблюдения за временными рядами
+    import matplotlib
     for obs_name, var_name in runner.sim_results.get_available_names():
         data_frame = runner.sim_results.get_dataframe_for_epochvar(obs_name, var_name)
+        data_frame.plot()
         print(data_frame)
+    matplotlib.pyplot.show()
 
 
 
