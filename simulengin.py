@@ -15,6 +15,10 @@ class cDiscreteEventSystem(object):
         self.log_printers = []
         self.blocks = []
 
+    def register_block(self, block):
+        block.s_set_devs(self)
+        self.blocks += [block]
+
     def convert_datetime_to_simtime(self, a_real_date):
         if not(a_real_date is None):
             return (a_real_date - self.__real_world_datetime_start).days
@@ -37,6 +41,11 @@ class cDiscreteEventSystem(object):
             block.init_sim()
             self.simpy_env.process(block.my_generator())
         yield empty_event(self.simpy_env) #Formality
+
+    def add_block_during_simulation(self, block):
+        self.register_block(block)
+        block.init_sim()
+        self.simpy_env.process(block.my_generator())
 
     def build_system(self):
         raise NotImplementedError()
