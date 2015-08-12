@@ -247,7 +247,7 @@ class cProducer(sime.cConnToDEVS):
         # План производства
         #self.PLAN_prod_plan = cPlan() # На момент отправки в производство. what = goods (final goods)
         # План снабжения производства
-        #self.PLAN_prod_supply_plan = cPlan() # На момент отправки в производство. what = goods (materials)
+        self.PLAN_prod_supply_plan = cPlan() # На момент отправки в производство. what = goods (materials)
         # План платежей
         #self.PLAN_payment_plan = cPlan() # На момент платежа. what = 'RUB' (потом можно разные валюты)
 
@@ -262,6 +262,7 @@ class cProducer(sime.cConnToDEVS):
         self.devs.simpy_env.process(self.PROC_sales_budget())
         self.devs.simpy_env.process(self.PROC_production_manager())
         self.devs.simpy_env.process(self.PROC_production_implementer())
+        self.devs.simpy_env.process(self.PROC_plan_raw_material_inventory())
         for pr_u in self.prod_units:
             pr_u.set_owner(self, self.RES_prod_unit_orders)
             self.devs.add_block_during_simulation(pr_u)
@@ -270,13 +271,37 @@ class cProducer(sime.cConnToDEVS):
     def PROC_replenish_inventory(self):
         while 1:
             orders = []
-            orders += [dict(good = 'Oil1Drum', qtty = 10000)]
-            orders += [dict(good = 'Oil2Drum', qtty = 10000)]
-            orders += [dict(good = 'Elastomer', qtty = 3000)]
+            horiz1 = 1
+            horiz2 = horiz1 + 15
+            for mat_i in self.PLAN_prod_supply_plan.get_avail_whats():
+                to_order = self.PLAN_sales_budget.get_howmuch_between_whens(mat_i, horiz1, horiz2)
+                if to_order > 0:
+                    orders += [dict(good = mat_i, qtty = to_order)]
             for ord_i in orders:
                 self.sent_log("Ordering " + str(ord_i['qtty']) + " of " + ord_i['good'])
                 self.RES_rawmat_buy_orders.put(ord_i)
-            yield self.devs.simpy_env.timeout(15)
+                self.PLAN_sales_budget.close_nearest_plan(ord_i['good'], ord_i['qtty'])
+            yield self.devs.simpy_env.timeout(1)
+
+    def PROC_plan_raw_material_inventory(self):
+        # Обновляем бюджет потребления производством (запасы на 45 дней продаж)
+        horiz1 = self.devs.nowsimtime()
+        horiz2 = horiz1 + 45
+        self.PLAN_prod_supply_plan.whipe()
+        for good_i in self.PLAN_sales_budget.get_avail_whats():
+            to_sale = self.PLAN_sales_budget.get_howmuch_between_whens(good_i, horiz1, horiz2)
+            avail = self.RES_warehouse.get_bulk_level(good_i)
+            to_produce = to_sale - avail
+            if to_produce > 0:
+                # TODO: many prod units?..
+                req_materials = self.prod_units[0].estimate_required_materials(good_i, to_produce)
+                for mat in req_materials:
+                    avail_mat = self.RES_warehouse.get_bulk_level(mat['material'])
+                    to_order = mat['qtty'] - avail_mat
+                    if to_order > 0:
+                        date_of_order = round((horiz1 + horiz2)/2, 0)
+                        self.PLAN_prod_supply_plan.add_plan(date_of_order, mat['material'], to_order)
+        yield self.devs.simpy_env.timeout(10)
 
     def PROC_supply_manager(self):
         while 1:
@@ -331,7 +356,7 @@ class cProducer(sime.cConnToDEVS):
                 self.sent_log("updating sales budget for " + str(cl_i))
                 plans = cl_i.ask_about_plans()
                 for msg in plans:
-                    self.sent_log(str(cl_i) + ' wants to buy ' + str(msg['qtty']) + ' of ' + msg['good'] + ' at ' + str(msg['when']))
+                    #self.sent_log(str(cl_i) + ' wants to buy ' + str(msg['qtty']) + ' of ' + msg['good'] + ' at ' + str(msg['when']))
                     self.PLAN_sales_budget.add_plan(msg['when'], msg['good'], msg['qtty'])
             yield self.devs.simpy_env.timeout(15)
 
@@ -385,10 +410,9 @@ class cProductionUnit(sime.cConnToDEVS):
     def __repr__(self):
         return self.name
 
-
     def init_sim(self):
-        #self.resource = simpy.Resource(self.devs.simpy_env)
-        #self.RES_operations = simpy.Store(self.devs.simpy_env)
+        # self.RES_order_queue = order_queue
+        # self.RES_internal_storage = cAccount(self.devs.simpy_env)
         pass
 
     def add_prod_scheme(self, prod_scheme):
@@ -398,22 +422,30 @@ class cProductionUnit(sime.cConnToDEVS):
         self.owner = owner
         self.RES_order_queue = order_queue
 
+    def find_fastest_prod_scheme(self, good, final_qtty):
+        best_scheme = None
+        min_time = None
+        for prod_sc in self.production_schemes:
+            if prod_sc.is_able_to_produce(good, final_qtty):
+                time_to_produce = prod_sc.get_time_to_produce(final_qtty)
+                if min_time is None:
+                    min_time = time_to_produce
+                    best_scheme = prod_sc
+                elif time_to_produce < min_time:
+                    min_time = time_to_produce
+                    best_scheme = prod_sc
+        return best_scheme
+
+    def estimate_required_materials(self, good, final_qtty):
+        scheme = self.find_fastest_prod_scheme(good, final_qtty)
+        return scheme.estimate_materials_consumption(final_qtty)
+
     def my_generator(self):
         while 1:
             prod_order = yield self.RES_order_queue.get()
             self.sent_log('producing ' + str(prod_order['qtty']) + ' of ' + str(prod_order['good']))
             # Подбираем "рецепт" производства
-            best_scheme = None
-            min_time = None
-            for prod_sc in self.production_schemes:
-                if prod_sc.is_able_to_produce(prod_order['good'], prod_order['qtty']):
-                    time_to_produce = prod_sc.get_time_to_produce(prod_order['qtty'])
-                    if min_time is None:
-                        min_time = time_to_produce
-                        best_scheme = prod_sc
-                    elif time_to_produce < min_time:
-                        min_time = time_to_produce
-                        best_scheme = prod_sc
+            best_scheme = self.find_fastest_prod_scheme(prod_order['good'], prod_order['qtty'])
             # TODO: что-то сделать, если не можем произвести
             for op_i in best_scheme.get_operations(prod_order['qtty']):
                 if op_i['type'] == 'take_material':
@@ -425,6 +457,15 @@ class cProductionUnit(sime.cConnToDEVS):
                 elif op_i['type'] == 'receive_good':
                     self.sent_log(str(op_i['qtty']) + ' of ' + str(op_i['good']) + ' is ready!')
                     self.owner.RES_warehouse.add_bulk(op_i['good'], op_i['qtty'])
+
+    def PROC_material_handler(self):
+        # Для заказа достаёт товар
+        pass
+
+    def PROC_producer(self):
+        # Выполняет заказы, для которых достали товар
+        pass
+
 
 class cProdSchemeMixer(object):
     # No sim logic here
@@ -459,15 +500,19 @@ class cProdSchemeMixer(object):
     def get_time_to_produce(self, final_qtty):
         return self.timeout
 
+    def estimate_materials_consumption(self, final_qtty):
+        materials = []
+        for inp in self.inputs:
+            materials += [{'material':inp['material'], 'qtty':inp['qtty_per_unit'] * final_qtty}]
+        return materials
+
     def get_operations(self, final_qtty):
         # returns a list of operations to produce final_qtty
         if final_qtty < self.min_qtty or final_qtty > self.max_qtty:
             return None
         operations = []
-        for inp in self.inputs:
-            mat = inp['material']
-            qtty = inp['qtty_per_unit'] * final_qtty
-            operations += [{'type':'take_material', 'material':mat, 'qtty':qtty}]
+        for mat_i in self.estimate_materials_consumption(final_qtty):
+            operations += [{'type':'take_material', 'material':mat_i['material'], 'qtty':mat_i['qtty']}]
         operations += [{'type':'busy', 'good':self.final_good, 'timeout':self.timeout}]
         operations += [{'type':'receive_good', 'good':self.final_good, 'qtty':final_qtty}]
         return operations
