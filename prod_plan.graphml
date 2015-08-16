@@ -16,7 +16,6 @@
     <data key="d0"/>
     <node id="n0" yfiles.foldertype="group">
       <data key="d4"/>
-      <data key="d5"/>
       <data key="d6">
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
@@ -24,7 +23,7 @@
               <y:Geometry height="1833.9127670312507" width="1241.6484974999998" x="-358.0570062500011" y="155.89062750000022"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="25" fontStyle="plain" hasLineColor="false" height="34.62744140625" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="1241.6484974999998" x="0.0" y="0.0">Producer</y:NodeLabel>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="25" fontStyle="plain" hasLineColor="false" height="34.62744140625" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="1241.6484974999998" x="0.0" y="0.0">BLOCK Producer</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
               <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
@@ -46,7 +45,6 @@
       <graph edgedefault="directed" id="n0:">
         <node id="n0::n0" yfiles.foldertype="folder">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:ProxyAutoBoundsNode>
               <y:Realizers active="1">
@@ -75,7 +73,6 @@
           </data>
           <graph edgedefault="directed" id="n0::n0:">
             <node id="n0::n0::n0">
-              <data key="d5"/>
               <data key="d6">
                 <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
                   <y:Geometry height="72.54271999999992" width="82.96672000000001" x="-259.3215325000001" y="386.9770937500003"/>
@@ -97,13 +94,12 @@ good <y:LabelModel>
               </data>
             </node>
             <node id="n0::n0::n1">
-              <data key="d5"/>
               <data key="d6">
                 <y:GenericNode configuration="com.yworks.flowchart.predefinedProcess">
                   <y:Geometry height="230.48199999999997" width="47.89500000000004" x="-311.7138125000002" y="386.9770937500002"/>
                   <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" modelName="custom" rotationAngle="270.0" textColor="#000000" visible="true" width="101.365234375" x="14.59691406250002" y="64.55838281249993">(RES prod orders)<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" modelName="custom" rotationAngle="270.0" textColor="#000000" visible="true" width="101.365234375" x="14.596914062500048" y="64.55838281249999">(RES prod orders)<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -114,7 +110,6 @@ good <y:LabelModel>
               </data>
             </node>
             <node id="n0::n0::n2">
-              <data key="d5"/>
               <data key="d6">
                 <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
                   <y:Geometry height="72.54271999999992" width="82.96672000000001" x="-259.3215325000001" y="463.5141875000006"/>
@@ -136,7 +131,6 @@ good <y:LabelModel>
               </data>
             </node>
             <node id="n0::n0::n3">
-              <data key="d5"/>
               <data key="d6">
                 <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
                   <y:Geometry height="72.54271999999992" width="82.96672000000001" x="-259.3215325000001" y="548.011281250001"/>
@@ -160,7 +154,6 @@ good <y:LabelModel>
           </graph>
         </node>
         <node id="n0::n1">
-          <data key="d5"/>
           <data key="d6">
             <y:SVGNode>
               <y:Geometry height="45.56999588012695" width="67.49800109863281" x="-46.78775679931641" y="219.0044309661867"/>
@@ -182,7 +175,6 @@ good <y:LabelModel>
           </data>
         </node>
         <node id="n0::n2">
-          <data key="d5"/>
           <data key="d6">
             <y:GenericNode configuration="com.yworks.entityRelationship.small_entity">
               <y:Geometry height="72.54271999999989" width="267.12125374999925" x="-46.78775679931641" y="208.74942890625022"/>
@@ -203,7 +195,6 @@ good <y:LabelModel>
         </node>
         <node id="n0::n3" yfiles.foldertype="folder">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:ProxyAutoBoundsNode>
               <y:Realizers active="1">
@@ -234,7 +225,6 @@ good <y:LabelModel>
         </node>
         <node id="n0::n4">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:UMLClassNode>
               <y:Geometry height="28.0" width="100.0" x="12.1150125000012" y="342.80704375000147"/>
@@ -256,7 +246,6 @@ good <y:LabelModel>
         </node>
         <node id="n0::n5" yfiles.foldertype="folder">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:ProxyAutoBoundsNode>
               <y:Realizers active="1">
@@ -287,7 +276,6 @@ good <y:LabelModel>
         </node>
         <node id="n0::n6" yfiles.foldertype="group">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:ProxyAutoBoundsNode>
               <y:Realizers active="0">
@@ -320,19 +308,18 @@ good <y:LabelModel>
         </node>
         <node id="n0::n7" yfiles.foldertype="group">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:ProxyAutoBoundsNode>
               <y:Realizers active="0">
                 <y:GroupNode>
-                  <y:Geometry height="252.78702464355513" width="266.2424937499994" x="142.1150125000012" y="1202.9125962500007"/>
+                  <y:Geometry height="252.78702464355501" width="266.2424937499994" x="142.1150125000012" y="1202.9125962500007"/>
                   <y:Fill color="#CAECFF80" transparent="false"/>
                   <y:BorderStyle color="#666699" type="dotted" width="1.0"/>
                   <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#99CCFF" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="266.2424937499994" x="0.0" y="0.0">PROC dealer</y:NodeLabel>
                   <y:Shape type="roundrectangle"/>
                   <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
                   <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
-                  <y:BorderInsets bottom="115" bottomF="114.99999999999966" left="0" leftF="0.0" right="64" rightF="64.00249374999942" top="0" topF="0.0"/>
+                  <y:BorderInsets bottom="115" bottomF="114.99999999999955" left="0" leftF="0.0" right="64" rightF="64.00249374999942" top="0" topF="0.0"/>
                 </y:GroupNode>
                 <y:GroupNode>
                   <y:Geometry height="135.54272000000003" width="139.2" x="142.1150125000012" y="851.5454087500009"/>
@@ -350,12 +337,11 @@ good <y:LabelModel>
           <graph edgedefault="directed" id="n0::n7:">
             <node id="n0::n7::n0" yfiles.foldertype="folder">
               <data key="d4"/>
-              <data key="d5"/>
               <data key="d6">
                 <y:ProxyAutoBoundsNode>
                   <y:Realizers active="1">
                     <y:GroupNode>
-                      <y:Geometry height="72.54271999999992" width="232.0" x="146.3575062500006" y="333.659968750001"/>
+                      <y:Geometry height="72.54271999999992" width="232.0" x="147.1150125000012" y="1230.2890610937507"/>
                       <y:Fill color="#CAECFF80" transparent="false"/>
                       <y:BorderStyle color="#666699" type="dotted" width="1.0"/>
                       <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#99CCFF" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="232.0" x="0.0" y="0.0">2</y:NodeLabel>
@@ -381,12 +367,11 @@ good <y:LabelModel>
             </node>
             <node id="n0::n7::n1" yfiles.foldertype="folder">
               <data key="d4"/>
-              <data key="d5"/>
               <data key="d6">
                 <y:ProxyAutoBoundsNode>
                   <y:Realizers active="1">
                     <y:GroupNode>
-                      <y:Geometry height="72.54271999999992" width="232.0" x="147.1150125000012" y="941.1897133935565"/>
+                      <y:Geometry height="72.54271999999992" width="232.0" x="147.1150125000012" y="1292.5569008935563"/>
                       <y:Fill color="#CAECFF80" transparent="false"/>
                       <y:BorderStyle color="#666699" type="dotted" width="1.0"/>
                       <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#99CCFF" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="232.0" x="0.0" y="0.0">2</y:NodeLabel>
@@ -414,7 +399,6 @@ good <y:LabelModel>
         </node>
         <node id="n0::n8">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:UMLClassNode>
               <y:Geometry height="28.0" width="100.0" x="12.1150125000012" y="550.2026887500009"/>
@@ -436,7 +420,6 @@ good <y:LabelModel>
         </node>
         <node id="n0::n9">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:UMLClassNode>
               <y:Geometry height="28.0" width="100.0" x="12.1150125000012" y="797.7453775000015"/>
@@ -458,7 +441,6 @@ good <y:LabelModel>
         </node>
         <node id="n0::n10" yfiles.foldertype="folder">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:ProxyAutoBoundsNode>
               <y:Realizers active="1">
@@ -487,7 +469,6 @@ good <y:LabelModel>
           </data>
           <graph edgedefault="directed" id="n0::n10:">
             <node id="n0::n10::n0">
-              <data key="d5"/>
               <data key="d6">
                 <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
                   <y:Geometry height="109.34271999999999" width="89.36671999999999" x="-259.3215325000001" y="767.0497226562504"/>
@@ -512,13 +493,12 @@ RUBtopay<y:LabelModel>
               </data>
             </node>
             <node id="n0::n10::n1">
-              <data key="d5"/>
               <data key="d6">
                 <y:GenericNode configuration="com.yworks.flowchart.predefinedProcess">
                   <y:Geometry height="230.48199999999997" width="47.89500000000004" x="-311.7138125000002" y="767.0497226562504"/>
                   <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" modelName="custom" rotationAngle="270.0" textColor="#000000" visible="true" width="64.69140625" x="14.59691406250002" y="82.89529687499999">(RES deals<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" modelName="custom" rotationAngle="270.0" textColor="#000000" visible="true" width="64.69140625" x="14.596914062500048" y="82.89529687499999">(RES deals<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -532,7 +512,6 @@ RUBtopay<y:LabelModel>
         </node>
         <node id="n0::n11">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:UMLClassNode>
               <y:Geometry height="28.0" width="100.0" x="402.92237499999965" y="1485.699620893556"/>
@@ -554,7 +533,6 @@ RUBtopay<y:LabelModel>
         </node>
         <node id="n0::n12" yfiles.foldertype="group">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:ProxyAutoBoundsNode>
               <y:Realizers active="0">
@@ -587,7 +565,6 @@ RUBtopay<y:LabelModel>
         </node>
         <node id="n0::n13">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:UMLClassNode>
               <y:Geometry height="28.0" width="100.0" x="12.1150125000012" y="1203.8604210937506"/>
@@ -609,7 +586,6 @@ RUBtopay<y:LabelModel>
         </node>
         <node id="n0::n14" yfiles.foldertype="folder">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:ProxyAutoBoundsNode>
               <y:Realizers active="1">
@@ -640,7 +616,6 @@ RUBtopay<y:LabelModel>
         </node>
         <node id="n0::n15" yfiles.foldertype="folder">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:ProxyAutoBoundsNode>
               <y:Realizers active="1">
@@ -671,7 +646,6 @@ RUBtopay<y:LabelModel>
         </node>
         <node id="n0::n16">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:UMLClassNode>
               <y:Geometry height="28.0" width="100.0" x="12.1150125000012" y="704.6853775000018"/>
@@ -692,7 +666,6 @@ RUBtopay<y:LabelModel>
           </data>
         </node>
         <node id="n0::n17">
-          <data key="d5"/>
           <data key="d6">
             <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
               <y:Geometry height="153.9999999999999" width="157.5999999999999" x="572.5504641113287" y="219.00443096618676"/>
@@ -715,7 +688,6 @@ Good 2<y:LabelModel>
         </node>
         <node id="n0::n18">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:UMLClassNode>
               <y:Geometry height="28.0" width="100.0" x="504.01537189941337" y="445.2026887500009"/>
@@ -737,7 +709,6 @@ Good 2<y:LabelModel>
         </node>
         <node id="n0::n19">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:UMLClassNode>
               <y:Geometry height="28.0" width="100.0" x="504.01537189941337" y="686.2026575000016"/>
@@ -758,7 +729,6 @@ Good 2<y:LabelModel>
           </data>
         </node>
         <node id="n0::n20">
-          <data key="d5"/>
           <data key="d6">
             <y:GenericNode configuration="com.yworks.bpmn.Event.withShadow">
               <y:Geometry height="30.0" width="30.0" x="282.15983750000254" y="359.43132875000094"/>
@@ -772,8 +742,8 @@ Good 2<y:LabelModel>
                 </y:ModelParameter>
               </y:NodeLabel>
               <y:StyleProperties>
-                <y:Property class="com.yworks.yfiles.bpmn.view.EventCharEnum" name="com.yworks.bpmn.characteristic" value="EVENT_CHARACTERISTIC_START"/>
                 <y:Property class="java.awt.Color" name="com.yworks.bpmn.icon.line.color" value="#000000"/>
+                <y:Property class="com.yworks.yfiles.bpmn.view.EventCharEnum" name="com.yworks.bpmn.characteristic" value="EVENT_CHARACTERISTIC_START"/>
                 <y:Property class="java.awt.Color" name="com.yworks.bpmn.icon.fill2" value="#d4d4d4cc"/>
                 <y:Property class="java.awt.Color" name="com.yworks.bpmn.icon.fill" value="#ffffffe6"/>
                 <y:Property class="com.yworks.yfiles.bpmn.view.BPMNTypeEnum" name="com.yworks.bpmn.type" value="EVENT_TYPE_TIMER"/>
@@ -785,7 +755,6 @@ Good 2<y:LabelModel>
     </node>
     <node id="n1" yfiles.foldertype="group">
       <data key="d4"/>
-      <data key="d5"/>
       <data key="d6">
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
@@ -793,7 +762,7 @@ Good 2<y:LabelModel>
               <y:Geometry height="1821.6617904687505" width="1238.9609974999998" x="1190.585915722656" y="168.14160406250028"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="25" fontStyle="plain" hasLineColor="false" height="34.62744140625" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="1238.9609974999998" x="0.0" y="0.0">Rew materials Market</y:NodeLabel>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="25" fontStyle="plain" hasLineColor="false" height="34.62744140625" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="1238.9609974999998" x="0.0" y="0.0">BLOCK materials Market</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
               <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
@@ -814,7 +783,6 @@ Good 2<y:LabelModel>
       </data>
       <graph edgedefault="directed" id="n1:">
         <node id="n1::n0">
-          <data key="d5"/>
           <data key="d6">
             <y:GenericNode configuration="com.yworks.entityRelationship.small_entity">
               <y:Geometry height="81.54271999999992" width="376.875" x="1411.902596630859" y="218.4310026123061"/>
@@ -835,7 +803,6 @@ Good 2<y:LabelModel>
         </node>
         <node id="n1::n1" yfiles.foldertype="folder">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:ProxyAutoBoundsNode>
               <y:Realizers active="1">
@@ -864,7 +831,6 @@ Good 2<y:LabelModel>
           </data>
           <graph edgedefault="directed" id="n1::n1:">
             <node id="n1::n1::n0">
-              <data key="d5"/>
               <data key="d6">
                 <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
                   <y:Geometry height="81.54271999999992" width="81.36671999999999" x="1305.2185612499993" y="445.61129296875094"/>
@@ -887,7 +853,6 @@ price<y:LabelModel>
               </data>
             </node>
             <node id="n1::n1::n1">
-              <data key="d5"/>
               <data key="d6">
                 <y:GenericNode configuration="com.yworks.flowchart.predefinedProcess">
                   <y:Geometry height="230.48199999999997" width="47.89500000000004" x="1252.8262812499993" y="445.61129296875094"/>
@@ -907,7 +872,6 @@ price<y:LabelModel>
         </node>
         <node id="n1::n2" yfiles.foldertype="folder">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:ProxyAutoBoundsNode>
               <y:Realizers active="1">
@@ -936,7 +900,6 @@ price<y:LabelModel>
           </data>
           <graph edgedefault="directed" id="n1::n2:">
             <node id="n1::n2::n0">
-              <data key="d5"/>
               <data key="d6">
                 <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
                   <y:Geometry height="81.54271999999992" width="81.36671999999999" x="1305.2185612499993" y="716.5234960937519"/>
@@ -959,7 +922,6 @@ price<y:LabelModel>
               </data>
             </node>
             <node id="n1::n2::n1">
-              <data key="d5"/>
               <data key="d6">
                 <y:GenericNode configuration="com.yworks.flowchart.predefinedProcess">
                   <y:Geometry height="230.48199999999997" width="47.89500000000004" x="1252.8262812499993" y="716.5234960937519"/>
@@ -979,7 +941,6 @@ price<y:LabelModel>
         </node>
         <node id="n1::n3" yfiles.foldertype="folder">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:ProxyAutoBoundsNode>
               <y:Realizers active="1">
@@ -1010,7 +971,6 @@ price<y:LabelModel>
         </node>
         <node id="n1::n4">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:UMLClassNode>
               <y:Geometry height="28.0" width="100.0" x="1466.0994999999991" y="448.91821940917896"/>
@@ -1032,7 +992,6 @@ price<y:LabelModel>
         </node>
         <node id="n1::n5">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:UMLClassNode>
               <y:Geometry height="28.0" width="100.0" x="1363.1842487499991" y="581.4936096685783"/>
@@ -1056,7 +1015,6 @@ price<y:LabelModel>
     </node>
     <node id="n2">
       <data key="d4"/>
-      <data key="d5"/>
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="28.0" width="100.0" x="976.204198749999" y="406.088148143924"/>
@@ -1078,7 +1036,6 @@ price<y:LabelModel>
     </node>
     <node id="n3">
       <data key="d4"/>
-      <data key="d5"/>
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="28.0" width="100.0" x="976.204198749999" y="529.9675696875014"/>
@@ -1100,7 +1057,6 @@ price<y:LabelModel>
     </node>
     <node id="n4" yfiles.foldertype="group">
       <data key="d4"/>
-      <data key="d5"/>
       <data key="d6">
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
@@ -1108,7 +1064,7 @@ price<y:LabelModel>
               <y:Geometry height="902.4832780468757" width="916.7501599999989" x="-1577.9573495361328" y="1087.3201164843751"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="25" fontStyle="plain" hasLineColor="false" height="34.62744140625" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="916.7501599999989" x="0.0" y="0.0">Final Product Market</y:NodeLabel>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="25" fontStyle="plain" hasLineColor="false" height="34.62744140625" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="916.7501599999989" x="0.0" y="0.0">BLOCK Final Product Market</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
               <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
@@ -1129,7 +1085,6 @@ price<y:LabelModel>
       </data>
       <graph edgedefault="directed" id="n4:">
         <node id="n4::n0">
-          <data key="d5"/>
           <data key="d6">
             <y:GenericNode configuration="com.yworks.entityRelationship.small_entity">
               <y:Geometry height="72.54271999999989" width="267.12125374999925" x="-1292.85648" y="1154.0374016406251"/>
@@ -1150,7 +1105,6 @@ price<y:LabelModel>
         </node>
         <node id="n4::n1" yfiles.foldertype="folder">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:ProxyAutoBoundsNode>
               <y:Realizers active="1">
@@ -1179,7 +1133,6 @@ price<y:LabelModel>
           </data>
           <graph edgedefault="directed" id="n4::n1:">
             <node id="n4::n1::n0">
-              <data key="d5"/>
               <data key="d6">
                 <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
                   <y:Geometry height="112.92672000000005" width="125.20672000000013" x="-1453.1759699999998" y="1323.5409804687508"/>
@@ -1203,7 +1156,6 @@ client<y:LabelModel>
               </data>
             </node>
             <node id="n4::n1::n1">
-              <data key="d5"/>
               <data key="d6">
                 <y:GenericNode configuration="com.yworks.flowchart.predefinedProcess">
                   <y:Geometry height="230.48199999999997" width="47.89500000000004" x="-1505.5682499999998" y="1323.5409804687508"/>
@@ -1225,7 +1177,6 @@ client<y:LabelModel>
     </node>
     <node id="n5" yfiles.foldertype="group">
       <data key="d4"/>
-      <data key="d5"/>
       <data key="d6">
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
@@ -1233,7 +1184,7 @@ client<y:LabelModel>
               <y:Geometry height="578.4692139343344" width="916.7501599999989" x="-1577.9573495361328" y="155.89062750000022"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="25" fontStyle="plain" hasLineColor="false" height="34.62744140625" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="916.7501599999989" x="0.0" y="0.0">Client</y:NodeLabel>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="25" fontStyle="plain" hasLineColor="false" height="34.62744140625" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="916.7501599999989" x="0.0" y="0.0">BLOCK Client</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
               <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
@@ -1254,13 +1205,12 @@ client<y:LabelModel>
       </data>
       <graph edgedefault="directed" id="n5:">
         <node id="n5::n0">
-          <data key="d5"/>
           <data key="d6">
             <y:GenericNode configuration="com.yworks.entityRelationship.small_entity">
               <y:Geometry height="72.54271999999989" width="267.12125374999925" x="-1292.85648" y="219.0044309661867"/>
               <y:Fill color="#CCFFCC" color2="#CCFFCC" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="25" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.62744140625" modelName="custom" textColor="#000000" visible="true" width="67.916015625" x="99.60261906249963" y="18.957639296874945">Client<y:LabelModel>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="25" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.62744140625" modelName="custom" textColor="#000000" visible="true" width="67.916015625" x="99.60261906249957" y="18.95763929687496">Client<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
@@ -1275,7 +1225,6 @@ client<y:LabelModel>
         </node>
         <node id="n5::n1" yfiles.foldertype="folder">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:ProxyAutoBoundsNode>
               <y:Realizers active="1">
@@ -1304,7 +1253,6 @@ client<y:LabelModel>
           </data>
           <graph edgedefault="directed" id="n5::n1:">
             <node id="n5::n1::n0">
-              <data key="d5"/>
               <data key="d6">
                 <y:GenericNode configuration="com.yworks.entityRelationship.small_entity">
                   <y:Geometry height="38.079999999999984" width="170.88" x="-1059.8637160839737" y="412.48081899047367"/>
@@ -1324,7 +1272,6 @@ client<y:LabelModel>
               </data>
             </node>
             <node id="n5::n1::n1">
-              <data key="d5"/>
               <data key="d6">
                 <y:GenericNode configuration="com.yworks.entityRelationship.small_entity">
                   <y:Geometry height="38.079999999999984" width="170.88" x="-1059.8637160839737" y="463.5616379809473"/>
@@ -1344,7 +1291,6 @@ client<y:LabelModel>
               </data>
             </node>
             <node id="n5::n1::n2">
-              <data key="d5"/>
               <data key="d6">
                 <y:GenericNode configuration="com.yworks.entityRelationship.small_entity">
                   <y:Geometry height="38.079999999999984" width="170.88" x="-1059.8637160839737" y="521.1232759618946"/>
@@ -1369,7 +1315,6 @@ client<y:LabelModel>
     </node>
     <node id="n6">
       <data key="d4"/>
-      <data key="d5"/>
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="28.0" width="168.78400000000005" x="-578.3525010180671" y="235.72373497558436"/>
@@ -1390,7 +1335,6 @@ client<y:LabelModel>
       </data>
     </node>
     <node id="n7">
-      <data key="d5"/>
       <data key="d6">
         <y:GenericNode configuration="com.yworks.bpmn.Event.withShadow">
           <y:Geometry height="30.0" width="30.0" x="-557.760501018067" y="303.7237349755843"/>
@@ -1404,8 +1348,8 @@ client<y:LabelModel>
             </y:ModelParameter>
           </y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="com.yworks.yfiles.bpmn.view.EventCharEnum" name="com.yworks.bpmn.characteristic" value="EVENT_CHARACTERISTIC_START"/>
             <y:Property class="java.awt.Color" name="com.yworks.bpmn.icon.line.color" value="#000000"/>
+            <y:Property class="com.yworks.yfiles.bpmn.view.EventCharEnum" name="com.yworks.bpmn.characteristic" value="EVENT_CHARACTERISTIC_START"/>
             <y:Property class="java.awt.Color" name="com.yworks.bpmn.icon.fill2" value="#d4d4d4cc"/>
             <y:Property class="java.awt.Color" name="com.yworks.bpmn.icon.fill" value="#ffffffe6"/>
             <y:Property class="com.yworks.yfiles.bpmn.view.BPMNTypeEnum" name="com.yworks.bpmn.type" value="EVENT_TYPE_TIMER"/>
@@ -1414,7 +1358,6 @@ client<y:LabelModel>
       </data>
     </node>
     <node id="n8">
-      <data key="d5"/>
       <data key="d6">
         <y:GenericNode configuration="com.yworks.bpmn.Event.withShadow">
           <y:Geometry height="30.0" width="30.0" x="-944.7583531250006" y="859.4172656848077"/>
@@ -1429,8 +1372,8 @@ client<y:LabelModel>
             </y:ModelParameter>
           </y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="com.yworks.yfiles.bpmn.view.EventCharEnum" name="com.yworks.bpmn.characteristic" value="EVENT_CHARACTERISTIC_START"/>
             <y:Property class="java.awt.Color" name="com.yworks.bpmn.icon.line.color" value="#000000"/>
+            <y:Property class="com.yworks.yfiles.bpmn.view.EventCharEnum" name="com.yworks.bpmn.characteristic" value="EVENT_CHARACTERISTIC_START"/>
             <y:Property class="java.awt.Color" name="com.yworks.bpmn.icon.fill2" value="#d4d4d4cc"/>
             <y:Property class="java.awt.Color" name="com.yworks.bpmn.icon.fill" value="#ffffffe6"/>
             <y:Property class="com.yworks.yfiles.bpmn.view.BPMNTypeEnum" name="com.yworks.bpmn.type" value="EVENT_TYPE_TIMER"/>
@@ -1440,7 +1383,6 @@ client<y:LabelModel>
     </node>
     <node id="n9">
       <data key="d4"/>
-      <data key="d5"/>
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="28.0" width="168.78400000000005" x="-1166.5881835082907" y="859.4172656848077"/>
@@ -1462,7 +1404,6 @@ client<y:LabelModel>
     </node>
     <node id="n10">
       <data key="d4"/>
-      <data key="d5"/>
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="26.361599999999953" width="167.17439999999988" x="-671.4387749999972" y="859.4172656848077"/>
@@ -1482,8 +1423,39 @@ client<y:LabelModel>
         </y:UMLClassNode>
       </data>
     </node>
+    <node id="n11" yfiles.foldertype="group">
+      <data key="d4"/>
+      <data key="d6">
+        <y:ProxyAutoBoundsNode>
+          <y:Realizers active="0">
+            <y:GroupNode>
+              <y:Geometry height="1453.808593749999" width="1238.9609974999998" x="-355.58068437986935" y="2079.784923419183"/>
+              <y:Fill color="#F2F0D8" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#B7B69E" borderDistance="0.0" fontFamily="Dialog" fontSize="25" fontStyle="plain" hasLineColor="false" height="34.62744140625" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="1238.9609974999998" x="0.0" y="0.0">BLOCK Product Mixer</y:NodeLabel>
+              <y:Shape type="rectangle"/>
+              <y:DropShadow color="#D2D2D2" offsetX="4" offsetY="4"/>
+              <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
+              <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
+              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
+            </y:GroupNode>
+            <y:GroupNode>
+              <y:Geometry height="1461.437988281249" width="1241.6484974999998" x="-355.58068437986935" y="2079.784923419183"/>
+              <y:Fill color="#F2F0D8" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#B7B69E" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="1241.6484974999998" x="0.0" y="0.0">3</y:NodeLabel>
+              <y:Shape type="rectangle"/>
+              <y:DropShadow color="#D2D2D2" offsetX="4" offsetY="4"/>
+              <y:State closed="true" closedHeight="1461.437988281249" closedWidth="1241.6484974999998" innerGraphDisplayEnabled="false"/>
+              <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
+              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
+            </y:GroupNode>
+          </y:Realizers>
+        </y:ProxyAutoBoundsNode>
+      </data>
+      <graph edgedefault="directed" id="n11:"/>
+    </node>
     <edge id="n0::e0" source="n0::n3" target="n0::n0">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="25.487324999999828" sy="1.3997150000005831" tx="0.0" ty="0.0">
@@ -1496,7 +1468,6 @@ client<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e1" source="n0::n5" target="n0::n10">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
@@ -1509,7 +1480,6 @@ client<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e2" source="n0::n10" target="n0::n7">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
@@ -1523,7 +1493,6 @@ client<y:LabelModel>
       </data>
     </edge>
     <edge id="e0" source="n0::n7" target="n1::n1">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
@@ -1537,7 +1506,6 @@ client<y:LabelModel>
       </data>
     </edge>
     <edge id="n1::e0" source="n1::n1" target="n1::n3">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
@@ -1550,7 +1518,6 @@ client<y:LabelModel>
       </data>
     </edge>
     <edge id="n1::e1" source="n1::n2" target="n1::n3">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="4.345050781250393" ty="19.71079724060087">
@@ -1564,7 +1531,6 @@ client<y:LabelModel>
       </data>
     </edge>
     <edge id="e1" source="n1::n3" target="n0::n7">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.45833755371700136" sy="9.245320018923053" tx="132.68442110028147" ty="99.82224186745498">
@@ -1578,7 +1544,6 @@ client<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e3" source="n0::n7::n0" target="n0::n6">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
@@ -1591,7 +1556,6 @@ client<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e4" source="n0::n12" target="n0::n7::n0">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
@@ -1604,7 +1568,6 @@ client<y:LabelModel>
       </data>
     </edge>
     <edge id="e2" source="n0::n14" target="n5::n0">
-      <data key="d9"/>
       <data key="d10">
         <y:GenericEdge configuration="com.yworks.bpmn.Connection">
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="28.447944009397702">
@@ -1620,7 +1583,6 @@ client<y:LabelModel>
       </data>
     </edge>
     <edge id="e3" source="n5::n1" target="n4::n1">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
@@ -1633,7 +1595,6 @@ client<y:LabelModel>
       </data>
     </edge>
     <edge id="e4" source="n9" target="n9">
-      <data key="d9"/>
       <data key="d10">
         <y:GenericEdge configuration="com.yworks.bpmn.Connection">
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
@@ -1649,7 +1610,6 @@ client<y:LabelModel>
       </data>
     </edge>
     <edge id="e5" source="n4::n1" target="n0::n15">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="26.97659522094" tx="6.630032026379013" ty="-34.450984705818655">
@@ -1665,7 +1625,6 @@ client<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e5" source="n0::n15" target="n0::n10">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="9.747240312498889" tx="72.86935077638012" ty="-20.0">
@@ -1679,7 +1638,6 @@ client<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e6" source="n0::n15" target="n0::n17">
-      <data key="d9"/>
       <data key="d10">
         <y:GenericEdge configuration="com.yworks.bpmn.Connection">
           <y:Path sx="0.0" sy="0.0" tx="37.43750000000102" ty="54.38340651549561">
@@ -1694,7 +1652,6 @@ client<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e7" source="n0::n14" target="n0::n17">
-      <data key="d9"/>
       <data key="d10">
         <y:GenericEdge configuration="com.yworks.bpmn.Connection">
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="50.38340651549561">
@@ -1709,7 +1666,6 @@ client<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e8" source="n0::n6" target="n0::n3">
-      <data key="d9"/>
       <data key="d10">
         <y:GenericEdge configuration="com.yworks.bpmn.Connection">
           <y:Path sx="126.53031325833585" sy="0.0" tx="-58.43852266111935" ty="22.941348575431107">
@@ -1724,7 +1680,6 @@ client<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e9" source="n0::n17" target="n0::n3">
-      <data key="d9"/>
       <data key="d10">
         <y:GenericEdge configuration="com.yworks.bpmn.Connection">
           <y:Path sx="-39.10972656249919" sy="0.0" tx="16.56147733888065" ty="17.941348575431107">
