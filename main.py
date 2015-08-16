@@ -272,15 +272,15 @@ class cProducer(sime.cConnToDEVS):
         while 1:
             orders = []
             horiz1 = 1
-            horiz2 = horiz1 + 15
+            horiz2 = horiz1 + 90
             for mat_i in self.PLAN_prod_supply_plan.get_avail_whats():
-                to_order = self.PLAN_sales_budget.get_howmuch_between_whens(mat_i, horiz1, horiz2)
+                to_order = self.PLAN_prod_supply_plan.get_howmuch_between_whens(mat_i, horiz1, horiz2)
                 if to_order > 0:
                     orders += [dict(good = mat_i, qtty = to_order)]
             for ord_i in orders:
                 self.sent_log("Ordering " + str(ord_i['qtty']) + " of " + ord_i['good'])
                 self.RES_rawmat_buy_orders.put(ord_i)
-                self.PLAN_sales_budget.close_nearest_plan(ord_i['good'], ord_i['qtty'])
+                self.PLAN_prod_supply_plan.close_nearest_plan(ord_i['good'], ord_i['qtty'])
             yield self.devs.simpy_env.timeout(1)
 
     def PROC_plan_raw_material_inventory(self):
@@ -719,14 +719,14 @@ if __name__ == "__main__":
     prod_scheme1.add_input('Oil1Drum', 0.9)
     prod_scheme1.add_input('Elastomer', 0.1)
     prod_scheme1.add_output('FinalGood1')
-    prod_scheme1.set_scheme_params(0,9999999,5)
+    prod_scheme1.set_scheme_params(0,9999999,30)
     prod_unit.add_prod_scheme(prod_scheme1)
 
     prod_scheme2 = cProdSchemeMixer()
     prod_scheme2.add_input('Oil2Drum', 0.89)
     prod_scheme2.add_input('Elastomer', 0.11)
     prod_scheme2.add_output('FinalGood2')
-    prod_scheme2.set_scheme_params(0,9999999,5)
+    prod_scheme2.set_scheme_params(0,9999999,60)
     prod_unit.add_prod_scheme(prod_scheme2)
 
     the_producer.add_prod_unit(prod_unit)
