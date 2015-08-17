@@ -91,6 +91,7 @@ class cConnToDEVS(object):
 
     def s_set_devs(self, discrete_event_system):
         self.devs = discrete_event_system
+        self.simpy_env = self.devs.simpy_env
 
     def sent_log(self, a_msg):
         self.devs.sent_log(self, a_msg)
