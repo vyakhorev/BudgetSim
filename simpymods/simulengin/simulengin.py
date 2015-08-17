@@ -42,8 +42,11 @@ class cDiscreteEventSystem(object):
             self.simpy_env.process(block.my_generator())
         yield empty_event(self.simpy_env) #Formality
 
-    def add_block_during_simulation(self, block):
-        self.register_block(block)
+    def add_block_during_simulation(self, block, do_register = 1):
+        if do_register:
+            self.register_block(block)
+        else:
+            block.s_set_devs(self)
         block.init_sim()
         self.simpy_env.process(block.my_generator())
 
@@ -60,6 +63,14 @@ class cDiscreteEventSystem(object):
     def add_printer(self, a_printer):
         # Куда лог выводить
         self.log_printers += [a_printer]
+
+    def add_block_named(self, block, block_name):
+        block.s_set_devs(self)
+        self.blocks += [block]
+        newname = "block_"+block_name
+        if hasattr(self, newname):
+            raise BaseException("Double attr with name " + newname)
+        setattr(self, newname, block)
 
 def empty_event(simpy_env):
     return simpy_env.timeout(0)

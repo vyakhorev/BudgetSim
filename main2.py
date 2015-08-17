@@ -16,7 +16,6 @@ class cBudgetSystem(simpymods.simulengin.cDiscreteEventSystem):
     def build_system(self):
         pass
 
-
 if __name__ == "__main__":
 
     start_date = datetime.date(2015,8,6)
