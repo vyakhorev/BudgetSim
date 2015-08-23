@@ -6,3 +6,4 @@ from simulengin import cAbstObserver
 from simulengin import cConnToDEVS
 from simulengin import cContainerPart
 from cAccount import cAccount
+from cPlan import cPlan

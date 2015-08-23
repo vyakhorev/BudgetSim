@@ -8,11 +8,6 @@ import random
 import sys
 
 class cBudgetSystem(simpymods.simulengin.cDiscreteEventSystem):
-    def set_the_producer(self, block):
-        block.s_set_devs(self)
-        self.blocks += [block]
-        self.the_producer = block
-
     def build_system(self):
         pass
 
@@ -26,8 +21,8 @@ if __name__ == "__main__":
     the_devs = cBudgetSystem(simpy_env, start_date)
     the_devs.set_seed(seed)
 
-    the_producer = simpymods.cAgent("The producer")
-    the_devs.set_the_producer(the_producer)
+    the_producer = simpymods.cAgent("Producer")
+    the_devs.add_block_named(the_producer, "Producer")
 
     print("start simulation")
 

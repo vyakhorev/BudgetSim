@@ -303,6 +303,7 @@ class cProducer(sime.cConnToDEVS):
                         self.PLAN_prod_supply_plan.add_plan(date_of_order, mat['material'], to_order)
         yield self.devs.simpy_env.timeout(10)
 
+
     def PROC_supply_manager(self):
         while 1:
             ord_i = yield self.RES_rawmat_buy_orders.get()

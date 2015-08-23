@@ -35,14 +35,13 @@ class cReceiptTourch(simpymods.simulengin.cConnToDEVS):
     def init_sim(self):
         self.ingoing_requests = simpy.Store(self.simpy_env)
 
-    def add_ingoing_request(self, qtty):
-        self.ingoing_requests.put({'item':self.output_item,'qtty':qtty})
-
     def my_generator(self):
         req_i = yield self.ingoing_requests.get()
         self.sent_log("doing " + str(req_i['qtty']) + " of " + str(req_i['item']))
         yield self.simpy_env.timeout(self.duration)
 
+    def add_ingoing_request(self, qtty):
+        self.ingoing_requests.put({'item':self.output_item,'qtty':qtty})
 
 if __name__ == "__main__":
     start_date = datetime.date(2015,8,6)  # Дату надо бы убрать потом из ядра...
