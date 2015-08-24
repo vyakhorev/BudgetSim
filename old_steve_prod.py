@@ -64,7 +64,7 @@ class cCrafter(simpymods.simulengin.cConnToDEVS):
 
 class cReceiptTourch(simpymods.simulengin.cConnToDEVS):
     output_item = 'tourch'
-    input_items = {'wooden_stick':1,'coal':1}
+    input_items = {'wooden_stick':1, 'coal':1}
 
     def set_ingoing_queue(self, a_queue):
         self.ingoing_requests = a_queue
