@@ -30,7 +30,8 @@ class cSteve(simpymods.simulengin.cConnToDEVS):
             yield self.simpy_env.timeout(100)
 
 
-class Cconnecter():
+class cConnecter():
+
     pass
 
 
@@ -66,17 +67,17 @@ class cRecipe(simpymods.simulengin.cConnToDEVS):
 
 
 class recipe_Torch(cRecipe):
-    # name = 'Torch'
-    # duration = 5
-    # components = {'planks': 1, 'coal': 2}
+    name = 'Torch'
+    duration = 5
+    components = {'planks': 1, 'coal': 2}
 
     def __init__(self):
-        name = 'Torch'
-        duration = 5
-        components = {'planks': 1, 'coal': 2}
+        # name = 'Torch'
+        # duration = 5
+        # components = {'planks': 1, 'coal': 2}
         self.add_sub_recipe('coal')
 
-        super(recipe_Torch, self).__init__(name, duration, components)
+        super(recipe_Torch, self).__init__(self.name, self.duration, self.components)
 
     def add_sub_recipe(self, sub):
         #super(recipe_Torch, self).add_complex_recipe(sub)
@@ -92,26 +93,6 @@ class recipe_Coal(cRecipe):
 
         super(recipe_Coal, self).__init__(name, duration, components)
 
-
-
-
-class cReceiptTourch(simpymods.simulengin.cConnToDEVS):
-    output_item = 'tourch'
-    duration = 5
-
-    def __repr__(self):
-        return "Production of " + str(self.output_item)
-
-    def init_sim(self):
-        self.ingoing_requests = simpy.Store(self.simpy_env)
-
-    def my_generator(self):
-        req_i = yield self.ingoing_requests.get()
-        self.sent_log("doing " + str(req_i['qtty']) + " of " + str(req_i['item']))
-        yield self.simpy_env.timeout(self.duration)
-
-    def add_ingoing_request(self, qtty):
-        self.ingoing_requests.put({'item':self.output_item,'qtty':qtty})
 
 class cCrafter(simpymods.simulengin.cConnToDEVS):
     pass
